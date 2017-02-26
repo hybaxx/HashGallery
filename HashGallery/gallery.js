@@ -5,7 +5,7 @@ function turn(ele) {
     else {cln=cln.replace(/photo-back/,'photo-front')}
     return ele.className=cln;
 }
-//有点模拟jQ的意思，get('.wrap')、get('#wrap')，把$换成了get;
+//通用函数，有点模拟jQ的意思，get('.wrap')、get('#wrap')，把$换成了get;
 function get(selector) {
     var method=selector.substr(0,1)=='.'?'getElementsByClassName':'getElementById';
     return document[method](selector.substr(1));//这个方括号是什么姿势？obj[method]();
@@ -28,4 +28,7 @@ function addPhotos() {
 }
 addPhotos();
 //排序海报
-functi
+function resort(n){
+    var photo_center=get('#photo_'+n);
+    photo_center.className+='photo-center';
+}
