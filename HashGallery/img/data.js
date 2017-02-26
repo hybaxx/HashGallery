@@ -183,7 +183,7 @@ var dataStr = '1、左耳<br>\
 ·机会总是留给有准备的人，但那往往是努力的人剩下来的。<br>\
 ';
 var d=dataStr.split('<br><br><br>');
-for (i=0;i<d.length;i++){
+for (var i=0;i<d.length;i++){
     var c=d[i].split('<br><br>');
     data.push({
         img:c[0].replace('、',' ')+'.jpg',
