@@ -63,10 +63,14 @@ body{
     z-index:99;
 }
 /*翻转*/
-.wrap{
-    perspective: 800px;
-    -webkit-perspective: 800px;
-    -moz-perspective: 800px;
+#wrap{
+    perspective: 1200px;
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+}
+.photo{
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
 }
 .photo-wrap{
     position: absolute;
@@ -74,7 +78,6 @@ body{
     height: 100%;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
-    /*-moz-transform-style: preserve-3d;*/
     transition:all .6s ease-out;
 }
 .photo-wrap .side-front{
