@@ -27,8 +27,9 @@ function addPhotos() {
     // get('#wrap').style='perspective:800px;-webkit-perspective:800px;-moz-perspective:800px';
 }
 addPhotos();
-//排序海报
+//排序所有海报
 function resort(n){
     var photo_center=get('#photo_'+n);
     photo_center.className+='photo-center';
 }
+//巴拉巴拉
