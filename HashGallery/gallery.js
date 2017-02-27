@@ -54,11 +54,13 @@ function resort(n){
     for(var i in photos_left){
         photos_left[i].style.left=random(ranges.left.x)+'px';
         photos_left[i].style.top=random(ranges.left.y)+'px';
+        photos_left[i].style['-webkit-transform']='rotate('+random([0,360])+'deg)';
     }
     for (var j in photos_right){
         // photos[j].style.left='1200px';
         photos[j].style.left=random(ranges.right.x)+'px';
         photos[j].style.top=random(ranges.right.y)+'px';
+        photos_right[j].style['-webkit-transform']='rotate('+random([0,360])+'deg)';
     }
 }
 //计算左右分区范围
