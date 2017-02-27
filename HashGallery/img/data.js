@@ -190,5 +190,5 @@ for (var i=0;i<d.length;i++){
         caption:c[0].split('、')[1],
         desc:c[1]
     });
-    console.log(data[i].caption);
+    // console.log(data[i].caption);
 }
