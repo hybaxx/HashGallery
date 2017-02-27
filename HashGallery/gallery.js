@@ -10,12 +10,12 @@ function get(selector) {
     var method=selector.substr(0,1)=='.'?'getElementsByClassName':'getElementById';
     return document[method](selector.substr(1));//这个方括号是什么姿势？obj[method]();
 }
-//通用函数，随机数，range=[min,max]
+//通用函数，生成范围内随机整数，range=[min,max]
 function random(range) {
     var max=Math.max(range[0],range[1]);
     var min=Math.min(range[0],range[1]);
     var diff=max-min;
-    var number=Math.random()*diff;
+    var number=Math.random()*diff+min;
     return parseInt(number);
 }
 //输出所有海报
@@ -42,18 +42,39 @@ function resort(n){
         // _photo[s].className=_photo[s].className.replace(/\s*photo-center\s*/,' '); //多余的功能：去掉所有photo-center类名
         photos.push(_photos[s]);
     }
+
     // var photo_center=get('#photo_'+n);//被覆盖的重复定义
     var photo_center=photos.splice(n,1)[0];//从photos里取出一个
     photo_center.className+='photo-center';
-    var photos_left=photos.splice(0,Math.ceil(photos.length/2));//此时的photos就是剩下的在右边的
-    // var photos_right=photos;
+
+    var photos_left=photos.splice(0,Math.ceil(photos.length/2));
+    var photos_right=photos;
     // console.log(photos_left.length,photos.length);
-    for(var s in photos_left){
-        photos_left[s].style.left='10px';
-        photos_left[s].style.top='10px';
+    var ranges=range();
+    for(var i in photos_left){
+        photos_left[i].style.left=random(ranges.left.x)+'px';
+        photos_left[i].style.top=random(ranges.left.y)+'px';
     }
-    for (var s in photos){
-        photos[s].style.left='400px';
-        photos[s].style.top='100px';
+    for (var j in photos_right){
+        // photos[j].style.left='1200px';
+        photos[j].style.left=random(ranges.right.x)+'px';
+        photos[j].style.top=random(ranges.right.y)+'px';
     }
+}
+//计算左右分区范围
+function range() {
+    var range={left:{x:[],y:[]},right:{x:[],y:[]}};
+    var wrap={w:get('#wrap').clientWidth,h:get('#wrap').clientHeight};
+    var photo={w:get('.photo')[0].clientWidth,h:get('.photo')[0].clientHeight};
+    range.wrap=wrap;
+    range.photo=photo;
+
+    range.left.x=[-photo.w/2,wrap.w/2-photo.w/2];
+    range.left.y=[-photo.h/2,wrap.h-photo.w/2];
+    range.right.x=[wrap.w/2+photo.w/2,wrap.w-photo.w/2];
+    range.right.y=range.left.y;
+    // console.log(range.wrap.w/2);
+    // console.log(range.left.x);
+    // console.log(range.right.x);
+    return range;
 }
