@@ -10,6 +10,14 @@ function get(selector) {
     var method=selector.substr(0,1)=='.'?'getElementsByClassName':'getElementById';
     return document[method](selector.substr(1));//这个方括号是什么姿势？obj[method]();
 }
+//通用函数，随机数，range=[min,max]
+function random(range) {
+    var max=Math.max(range[0],range[1]);
+    var min=Math.min(range[0],range[1]);
+    var diff=max-min;
+    var number=Math.random()*diff;
+    return parseInt(number);
+}
 //输出所有海报
 function addPhotos() {
     var template=get('#wrap').innerHTML;
@@ -23,8 +31,7 @@ function addPhotos() {
         html.push(_html)
     }
     get('#wrap').innerHTML=html.join('');
-    resort(parseInt(Math.random()*19));
-    // get('#wrap').style='perspective:800px;-webkit-perspective:800px;-moz-perspective:800px';
+    resort(random([0,data.length]));
 }
 addPhotos();
 //排序所有海报
