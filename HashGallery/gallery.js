@@ -36,7 +36,24 @@ function addPhotos() {
 addPhotos();
 //排序所有海报
 function resort(n){
-    var photo_center=get('#photo_'+n);
+    var _photos=get('.photo');//_photos不是标准数组，不支持sort()、splice()等函数
+    var photos=[];//需要把_photos转化成有序的photos数组；
+    for(var s=0;s<_photos.length;s++){//不是标准数组，不能用s in _photos写法
+        // _photo[s].className=_photo[s].className.replace(/\s*photo-center\s*/,' '); //多余的功能：去掉所有photo-center类名
+        photos.push(_photos[s]);
+    }
+    // var photo_center=get('#photo_'+n);//被覆盖的重复定义
+    var photo_center=photos.splice(n,1)[0];//从photos里取出一个
     photo_center.className+='photo-center';
+    var photos_left=photos.splice(0,Math.ceil(photos.length/2));//此时的photos就是剩下的在右边的
+    // var photos_right=photos;
+    // console.log(photos_left.length,photos.length);
+    for(var s in photos_left){
+        photos_left[s].style.left='10px';
+        photos_left[s].style.top='10px';
+    }
+    for (var s in photos){
+        photos[s].style.left='400px';
+        photos[s].style.top='100px';
+    }
 }
-//巴拉巴拉
