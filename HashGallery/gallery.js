@@ -9,15 +9,16 @@ function turn(ele) {
     var _index=ele.getAttribute('id').match(/\d+/g);
         if(/photo-center/.test(cln)){
             if (/photo-front/.test(cln)){ cln=cln.replace(/photo-front/,'photo-back')}
-            else {cln=cln.replace(/photo-back/,'photo-front')}
+            else {cln=cln.replace(/photo-back/,'photo-front')};
+            ele.className=cln;//如果放到turn()的最后，会覆盖resort()修改的类名
         }
         else {
             resort(_index);
-            cln+='photo-center';
+            //cln+='photo-center';//resort()已经干过了；
         }
-    return ele.className=cln;
+
 }
-//通用函数，生成范围内随机整数，range=[min,max]
+//通用函数，生成范围内随机整数，参数为数组range=[min,max]
 function random(range) {
     var max=Math.max(range[0],range[1]);
     var min=Math.min(range[0],range[1]);
