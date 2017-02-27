@@ -15,6 +15,7 @@ body{
     top:50%;
     margin-top: -350px;
     overflow: hidden;
+    background:url(img/background.jpg);
 }
 /*海报样式*/
 .photo{
