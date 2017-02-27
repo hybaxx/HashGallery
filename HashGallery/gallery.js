@@ -61,12 +61,12 @@ function resort(n){
     for(var i in photos_left){
         photos_left[i].style.left=random(ranges.left.x)+'px';
         photos_left[i].style.top=random(ranges.left.y)+'px';
-        photos_left[i].style['-webkit-transform']='rotate('+random([-180,180])+'deg)';
+        photos_left[i].style['-webkit-transform']='rotate('+random([-150,150])+'deg)';
     }
     for (var j in photos_right){
         photos[j].style.left=random(ranges.right.x)+'px';
         photos[j].style.top=random(ranges.right.y)+'px';
-        photos_right[j].style['-webkit-transform']='rotate('+random([-180,180])+'deg)';
+        photos_right[j].style['-webkit-transform']='rotate('+random([-150,150])+'deg)';
         // photos_right[j].style['display']='none';//又是这个姿势！
     }
 }
