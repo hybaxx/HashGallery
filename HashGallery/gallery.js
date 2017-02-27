@@ -6,19 +6,18 @@ function get(selector) {
 //翻面控制
 function turn(ele) {
     var cln=ele.className;
-    var _index=ele.getAttribute('id').match(/\d+/g);
+    var _index=ele.getAttribute('id').match(/\d+/g);//自创写法，为自己点赞
         if(/photo-center/.test(cln)){
             if (/photo-front/.test(cln)){ cln=cln.replace(/photo-front/,'photo-back')}
             else {cln=cln.replace(/photo-back/,'photo-front')};
-            ele.className=cln;//如果放到turn()的最后，会覆盖resort()修改的类名
+            ele.className=cln;//如果放到turn()的最后，会覆盖resort()修改的className值；
         }
         else {
             resort(_index);
             //cln+='photo-center';//resort()已经干过了；
         }
-
 }
-//通用函数，生成范围内随机整数，参数为数组range=[min,max]
+//通用函数，生成范围内随机整数，参数为长度为2的数组range=[min,max]
 function random(range) {
     var max=Math.max(range[0],range[1]);
     var min=Math.min(range[0],range[1]);
