@@ -6,11 +6,16 @@ function get(selector) {
 //翻面控制
 function turn(ele) {
     var cln=ele.className;
-    var _index=ele.getAttribute('id').match(/\d+/g);//自创写法，为自己点赞
+    var _index=ele.getAttribute('id').match(/\d+/g);
+    var nav_cln=get('.i-current')[0].className;
         if(/photo-center/.test(cln)){
             if (/photo-front/.test(cln)){ cln=cln.replace(/photo-front/,'photo-back')}
-            else {cln=cln.replace(/photo-back/,'photo-front')};
+                else {cln=cln.replace(/photo-back/,'photo-front')};
             ele.className=cln;//如果放到turn()的最后，会覆盖resort()修改的className值；
+
+            if (/front/.test(nav_cln)){nav_cln=nav_cln.replace(/front/,'back');}
+                else{nav_cln=nav_cln.replace(/back/,'front');}
+            get('.i-current')[0].className=nav_cln;//同上
         }
         else {
             resort(_index);
@@ -29,14 +34,18 @@ function random(range) {
 function addPhotos() {
     var template=get('#wrap').innerHTML;
     var html=[];
+    var nav=[];
     for(var i in data){
         var _html=template
             .replace('{{index}}',i)
             .replace('{{caption}}',data[i].caption)
             .replace('{{img}}',data[i].img)
-            .replace('{{desc}}',data[i].desc)
-        html.push(_html)
+            .replace('{{desc}}',data[i].desc);
+        html.push(_html);
+        var _nav='<span id="nav_'+i+'" class="i" onclick="turn(get(\'#photo_'+i+'\'))"></span>';
+        nav.push(_nav);
     }
+    html.push('<nav id="nav" class="nav">'+nav.join('')+'</nav>');
     get('#wrap').innerHTML=html.join('');
     resort(random([0,data.length]));
 }
@@ -48,6 +57,7 @@ function resort(n){
     for(var s=0;s<_photos.length;s++){//不是标准数组，不能用s in _photos写法
         _photos[s].className=_photos[s].className.replace(/\s*photo-center\s*/,' ');//连同前后的空格
         photos.push(_photos[s]);
+        get('#nav_'+s).className='i';
     }
 
     // var photo_center=get('#photo_'+n);//被覆盖的重复定义
@@ -69,6 +79,7 @@ function resort(n){
         photos_right[j].style['-webkit-transform']='rotate('+random([-150,150])+'deg)';
         // photos_right[j].style['display']='none';//又是这个姿势！
     }
+    get('#nav_'+n).className+=' i-current i-front';
 }
 //计算左右分区范围
 function range() {
