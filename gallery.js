@@ -9,12 +9,17 @@ function turn(ele) {
     var _index=ele.getAttribute('id').match(/\d+/g);
     var nav_cln=get('.i-current')[0].className;
         if(/photo-center/.test(cln)){
-            if (/photo-front/.test(cln)){ cln=cln.replace(/photo-front/,'photo-back')}
-                else {cln=cln.replace(/photo-back/,'photo-front')};
+            if (/photo-front/.test(cln)){
+                cln=cln.replace(/photo-front/,'photo-back');
+                nav_cln=nav_cln.replace(/front/,'back');
+            }
+            else {
+                cln=cln.replace(/photo-back/,'photo-front');
+                nav_cln=nav_cln.replace(/back/,'front');
+            }
             ele.className=cln;//如果放到turn()的最后，会覆盖resort()修改的className值；
-
-            if (/front/.test(nav_cln)){nav_cln=nav_cln.replace(/front/,'back');}
-                else{nav_cln=nav_cln.replace(/back/,'front');}
+            // if (/front/.test(nav_cln)){nav_cln=nav_cln.replace(/front/,'back');}
+            //     else{nav_cln=nav_cln.replace(/back/,'front');}
             get('.i-current')[0].className=nav_cln;//同上
         }
         else {
@@ -55,18 +60,18 @@ function resort(n){
     var _photos=get('.photo');//_photos不是标准数组，不支持sort()、splice()等函数
     var photos=[];//需要把_photos转化成有序的photos数组；
     for(var s=0;s<_photos.length;s++){//不是标准数组，不能用s in _photos写法
-        _photos[s].className=_photos[s].className.replace(/\s*photo-center\s*/,' ');//连同前后的空格
+        _photos[s].className=_photos[s].className.replace(/\s*photo-center\s*/,' ');
+        _photos[s].className=_photos[s].className.replace(/\s*photo-back\s*/,' photo-front ');//连同前后的空格
         photos.push(_photos[s]);
+        // get('#nav_'+s).className=get('#nav_'+s).className.replace(/\s*i-current\s*/,' ');
         get('#nav_'+s).className='i';
     }
-
-    // var photo_center=get('#photo_'+n);//被覆盖的重复定义
     var photo_center=photos.splice(n,1)[0];//从photos里取出一个
     photo_center.className+='photo-center';
 
     var photos_left=photos.splice(0,Math.ceil(photos.length/2));
     var photos_right=photos;
-    // console.log(photos_left.length,photos.length);
+
     var ranges=range();
     for(var i in photos_left){
         photos_left[i].style.left=random(ranges.left.x)+'px';
