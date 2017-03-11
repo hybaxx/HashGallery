@@ -1,4 +1,4 @@
-# 散列画廊
+# 第二个案例：散列画廊特效（原生JavaScript）
 ## 新的CSS效果：
 * 3D视图位置设置、子元素3D支持。perspective、transform-style:preserve-3d
 * 翻转时不可见。backface-visibility:hidden
